@@ -1,0 +1,6 @@
+[submodule "fairseq-waitk/fairseq"]
+	path = fairseq-waitk/fairseq
+	url = https://github.com/pytorch/fairseq.git
+[submodule "fairseq-mma-il/fairseq"]
+	path = fairseq-mma-il/fairseq
+	url = https://github.com/pytorch/fairseq.git
