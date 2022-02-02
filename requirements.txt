@@ -5,7 +5,7 @@ omegaconf<2.1
 ninja
 numpy
 regex
-sacrebleu
+sacrebleu[ja]==1.5.1
 sentencepiece
 torch
 tqdm
