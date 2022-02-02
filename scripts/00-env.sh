@@ -11,6 +11,11 @@
 check_env SRC TRG WORKDIR MUSTC_ROOT WMT_DATA_ROOT FAIRSEQ_ROOT
 
 ##
+## Set fairseq root
+##
+FAIRSEQ_WAITK=
+
+##
 ## Parameters
 ##
 python3=python3
@@ -25,7 +30,7 @@ preprocess_workers=8
 ##
 ## Common variables
 ##
-utilsdir=${scriptdir}/utils
+utilsdir=${basedir}/utils
 preprocess_text_src=${utilsdir}/preprocess_text_${SRC}.py
 preprocess_text_trg=${utilsdir}/preprocess_text_${TRG}.py
 spm_train=${FAIRSEQ_ROOT}/scripts/spm_train.py

@@ -3,7 +3,10 @@
 ###
 ### Text data preparation script for IWSLT 2022 text-to-text baselines
 ###
-scriptdir=`dirname $0`/scripts
+
+basedir=`dirname $0`
+scriptdir=${basedir}/scripts
+FAIRSEQ_ROOT=${basedir}/fairseq-waitk/fairseq
 . ${scriptdir}/00-env.sh
 
 parse_options "$@"

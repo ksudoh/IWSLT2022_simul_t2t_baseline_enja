@@ -3,7 +3,10 @@
 ###
 ### Train a subword unigram model using SentencePiece 
 ###
-scriptdir=`dirname $0`/scripts
+
+basedir=`dirname $0`
+scriptdir=${basedir}/scripts
+FAIRSEQ_ROOT=${basedir}/fairseq-mma-il/fairseq
 . ${scriptdir}/00-env.sh
 
 parse_options "$@"
