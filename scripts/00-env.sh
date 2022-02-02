@@ -8,12 +8,7 @@
 ##
 ## Check environment variables
 ##
-check_env SRC TRG WORKDIR MUSTC_ROOT WMT_DATA_ROOT FAIRSEQ_ROOT
-
-##
-## Set fairseq root
-##
-FAIRSEQ_WAITK=
+check_env SRC TRG WORKDIR MUSTC_ROOT WMT_DATA_ROOT
 
 ##
 ## Parameters
@@ -37,7 +32,7 @@ spm_train=${FAIRSEQ_ROOT}/scripts/spm_train.py
 spm_encode=${FAIRSEQ_ROOT}/scripts/spm_encode.py
 
 langpair=${SRC}-${TRG}
-mustc_data_dir=${MUSTC_ROOT}/${langpair}
+mustc_data_dir=${MUSTC_ROOT}/${langpair}/data
 wmt_data_dir=${WMT_DATA_ROOT}
 
 mustc_corpustype="TXT"
@@ -57,7 +52,8 @@ corpusdir=${WORKDIR}/corpus/${langpair}
 
 sentencepiece_dir=${WORKDIR}/sentencepiece/${langpair}
 preprocessed_data_dir=${WORKDIR}/preprocessed/${langpair}
-nmt_model_dir=${WORKDIR}/model/${langpair}
+model_basedir=${WORKDIR}/model/${langpair}
+devtest_basedir=${WORKDIR}/devtest/${langpair}
 
 ##
 ## Check directories and utilities

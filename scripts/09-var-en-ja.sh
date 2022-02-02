@@ -4,7 +4,7 @@
 ### Variables for IWSLT 2022 English-to-Japanese Simultaneous text-to-text baselines
 ###
 
-trainset_add=(newscommentary wikimatrix wikititles jesc)
+trainset_add=(newscommentary wikititles wikimatrix jesc kftt)
 
 newscommentary_corpustype="TSV"
 newscommentary_name=news-commentary-v16.${SRC}-${TRG}.tsv

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-### Train a subword unigram model using SentencePiece 
+### Train a wait-k model
 ###
 
 basedir=`dirname $0`
@@ -13,20 +13,27 @@ parse_options "$@"
 shift $?
 if test ${verbose} -gt 0 ; then set -x ; fi
 
-K=20
+if test -z "${K}" ; then
+    K=20
+fi
 max_epoch=70
 dropout=0.3
 label_smoothing=0.1
 max_tokens=7168
 update_freq=4
-model_output_dir=${nmt_model_dir}/wait-${K}
+model_output_dir=${model_basedir}/wait-${K}
 
 if test -e ${model_output_dir}/.done ; then
     notice "Skipped the model training on ${model_output_dir}."
 else
-    tmpdir=`tempfile`
-    /bin/rm ${tmpdir}
-    make_dir `dirname ${model_output_dir}`
+    if test -s ${model_output_dir}/checkpoint_last.pt ; then
+        notice "Intermediate models are found in ${model_output_dir}. Restarting the training."
+        tmpdir=${model_output_dir}
+    else
+        tmpdir=`tempfile`
+        /bin/rm ${tmpdir}
+        make_dir `dirname ${model_output_dir}`
+    fi
 
     if env PYTHONPATH=${FAIRSEQ_ROOT} ${python3} ${FAIRSEQ_ROOT}/train.py \
         ${preprocessed_data_dir} \
@@ -51,8 +58,14 @@ else
     	--label-smoothing ${label_smoothing}  \
     	--max-tokens ${max_tokens} \
 		--update-freq ${update_freq} ; then
-        /bin/mv ${tmpdir} ${train_out}
+        if test ${tmpdir} != ${model_output_dir} ; then
+            /bin/mv ${tmpdir} ${model_output_dir}
+        fi
+        touch ${model_output_dir}/.done
     else
-        error_and_die "Failed to train the model on ${model_output_dir}."
+        if test ${tmpdir} != ${model_output_dir} && test -s ${model_output_dir}/checkpoint_last.pt ; then
+            /bin/mv ${tmpdir} ${model_output_dir}
+        fi
+        error_and_die "Failed to train the model on ${model_output_dir}. Intermediate checkpoints may be found there."
     fi
 fi
