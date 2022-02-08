@@ -1,6 +1,7 @@
 cffi
 cython
 hydra-core<1.1
+importlib-metadata<4.3
 omegaconf<2.1
 ninja
 numpy
