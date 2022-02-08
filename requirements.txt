@@ -4,8 +4,13 @@ hydra-core<1.1
 omegaconf<2.1
 ninja
 numpy
+pytest
+pytest-cov
+pytest-flake8
 regex
+requests
 sacrebleu[ja]==1.5.1
 sentencepiece
+soundfile
 torch
 tqdm
